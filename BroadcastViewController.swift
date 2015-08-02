@@ -1,6 +1,7 @@
 import Cocoa
 import AVFoundation
 import AVKit
+import Foundation
 
 class BroadcastViewController: NSViewController, AVCaptureFileOutputRecordingDelegate, NSWindowDelegate {
     @IBOutlet weak var previewView: NSView?
@@ -13,6 +14,7 @@ class BroadcastViewController: NSViewController, AVCaptureFileOutputRecordingDel
     var currentAudioInput: AVCaptureInput?
     var captureOutput: AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
     var counter: NSInteger = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -133,11 +135,20 @@ class BroadcastViewController: NSViewController, AVCaptureFileOutputRecordingDel
         return outputPath!
     }
     
-    func captureOutput(captureOutput: AVCaptureFileOutput!,
-        didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!,
-        fromConnections connections: [AnyObject]!,
-        error: NSError!) {
-            println("finished recoding")
+    func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!) {
+        let savedFile = outputFileURL.absoluteString
+        let savedDirectory = savedFile?.stringByDeletingLastPathComponent
+        let basename = savedFile?.lastPathComponent.stringByDeletingPathExtension
+        let fullOutputPath = savedDirectory?.stringByAppendingPathComponent(basename!).stringByAppendingPathExtension("ts")
+        
+        let task = NSTask()
+        task.launchPath = "/usr/local/bin/ffmpeg"
+        task.arguments = ["-i",savedFile!,"-bsf","h264_mp4toannexb","-c","copy",fullOutputPath!]
+        task.launch()
+        
+        task.waitUntilExit()
+        
+        NSFileManager.defaultManager().removeItemAtURL(outputFileURL, error: nil)
     }
     
 }
