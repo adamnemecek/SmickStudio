@@ -7,18 +7,36 @@
 //
 
 import Cocoa
+import AVFoundation
+import AVKit
 
 class ViewController: NSViewController {
-
+    @IBOutlet weak var videoView: AVPlayerView?
+    var loaded = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
     override var representedObject: AnyObject? {
         didSet {
-        // Update the view, if already loaded.
+        }
+    }
+    
+    override func viewDidAppear() {
+        if !loaded {
+            let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.liveWindow = self.view.window?.windowController() as! NSWindowController
+            
+            view.window?.level = kCGMaximumWindowLevelKey
+            let boundsRect = self.videoView?.bounds
+            self.view.window!.aspectRatio = self.videoView!.bounds.size
+            videoView?.showsFullScreenToggleButton = true
+            let smickTVURL = NSURL(string: "http://broadcast.smick.tv/channel/live.m3u8")
+            let player = AVPlayer(URL: smickTVURL)
+            videoView?.player = player
+            player.play()
+            loaded = true
         }
     }
 
