@@ -12,6 +12,9 @@
 		07DFFC601B6D425E006368B7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07DFFC5F1B6D425E006368B7 /* Images.xcassets */; };
 		07DFFC631B6D425E006368B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07DFFC611B6D425E006368B7 /* Main.storyboard */; };
 		07DFFC6F1B6D425E006368B7 /* SmickStudioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DFFC6E1B6D425E006368B7 /* SmickStudioTests.swift */; };
+		07DFFC791B6D42D4006368B7 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DFFC781B6D42D4006368B7 /* AVKit.framework */; };
+		07DFFC7B1B6D42D9006368B7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DFFC7A1B6D42D9006368B7 /* AVFoundation.framework */; };
+		07DFFC7D1B6D5509006368B7 /* BroadcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DFFC7C1B6D5509006368B7 /* BroadcastViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +37,9 @@
 		07DFFC681B6D425E006368B7 /* SmickStudioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmickStudioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07DFFC6D1B6D425E006368B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		07DFFC6E1B6D425E006368B7 /* SmickStudioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmickStudioTests.swift; sourceTree = "<group>"; };
+		07DFFC781B6D42D4006368B7 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		07DFFC7A1B6D42D9006368B7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		07DFFC7C1B6D5509006368B7 /* BroadcastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BroadcastViewController.swift; path = ../BroadcastViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +47,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07DFFC7B1B6D42D9006368B7 /* AVFoundation.framework in Frameworks */,
+				07DFFC791B6D42D4006368B7 /* AVKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +65,8 @@
 		07DFFC4D1B6D425E006368B7 = {
 			isa = PBXGroup;
 			children = (
+				07DFFC7A1B6D42D9006368B7 /* AVFoundation.framework */,
+				07DFFC781B6D42D4006368B7 /* AVKit.framework */,
 				07DFFC581B6D425E006368B7 /* SmickStudio */,
 				07DFFC6B1B6D425E006368B7 /* SmickStudioTests */,
 				07DFFC571B6D425E006368B7 /* Products */,
@@ -77,6 +87,7 @@
 			children = (
 				07DFFC5B1B6D425E006368B7 /* AppDelegate.swift */,
 				07DFFC5D1B6D425E006368B7 /* ViewController.swift */,
+				07DFFC7C1B6D5509006368B7 /* BroadcastViewController.swift */,
 				07DFFC5F1B6D425E006368B7 /* Images.xcassets */,
 				07DFFC611B6D425E006368B7 /* Main.storyboard */,
 				07DFFC591B6D425E006368B7 /* Supporting Files */,
@@ -209,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07DFFC5E1B6D425E006368B7 /* ViewController.swift in Sources */,
+				07DFFC7D1B6D5509006368B7 /* BroadcastViewController.swift in Sources */,
 				07DFFC5C1B6D425E006368B7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -400,6 +412,7 @@
 				07DFFC741B6D425E006368B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		07DFFC751B6D425E006368B7 /* Build configuration list for PBXNativeTarget "SmickStudioTests" */ = {
 			isa = XCConfigurationList;
@@ -408,6 +421,7 @@
 				07DFFC771B6D425E006368B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
