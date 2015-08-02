@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6198" systemVersion="14A297b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6198"/>
+        <plugIn identifier="com.apple.AVKitIBPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -87,14 +88,10 @@
                                                 <action selector="performClose:" target="Ady-hI-5gd" id="HmO-Ls-i7Q"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Save…" keyEquivalent="s" id="pxx-59-PXV">
+                                        <menuItem title="Broadcast" keyEquivalent="b" id="pxx-59-PXV">
                                             <connections>
                                                 <action selector="saveDocument:" target="Ady-hI-5gd" id="teZ-XB-qJY"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Save As…" keyEquivalent="S" id="Bw7-FT-i3A">
-                                            <connections>
-                                                <action selector="saveDocumentAs:" target="Ady-hI-5gd" id="mDf-zr-I0C"/>
+                                                <segue destination="FZa-cN-lfc" kind="show" id="uKI-3D-Eh5"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Revert to Saved" id="KaW-ft-85H">
@@ -641,20 +638,21 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="SmickStudio" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="435" y="452"/>
         </scene>
-        <!--Window Controller - Window-->
+        <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                <windowController storyboardIdentifier="live-window-controller" id="B8D-0N-5wS" sceneMemberID="viewController">
+                    <window key="window" identifier="live-window" title="Smick TV" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="smick-tv-window" animationBehavior="default" id="IQv-IB-iLA">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
+                        <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
+                        <rect key="contentRect" x="572" y="286" width="800" height="450"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <value key="minSize" type="size" width="400" height="225"/>
                     </window>
                     <connections>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
@@ -662,20 +660,140 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="-629" y="20"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="SmickStudio" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="316"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <avPlayerView controlsStyle="floating" translatesAutoresizingMaskIntoConstraints="NO" id="ItF-DD-Kgr">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="316"/>
+                            </avPlayerView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="ItF-DD-Kgr" secondAttribute="bottom" id="FVo-8A-ndD"/>
+                            <constraint firstAttribute="trailing" secondItem="ItF-DD-Kgr" secondAttribute="trailing" id="jam-Ea-JB2"/>
+                            <constraint firstItem="ItF-DD-Kgr" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="wBn-Cy-36Y"/>
+                            <constraint firstItem="ItF-DD-Kgr" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="xbM-bD-m9k"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="videoView" destination="ItF-DD-Kgr" id="Zpo-d0-uLR"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="137" y="20"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="MNd-KX-wZH">
+            <objects>
+                <windowController id="FZa-cN-lfc" sceneMemberID="viewController">
+                    <window key="window" title="Broadcast to Smick TV" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="XbL-hd-b6R">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="397" y="320" width="501" height="313"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+                        <value key="minSize" type="size" width="501" height="313"/>
+                    </window>
+                    <connections>
+                        <segue destination="dCp-rt-uLW" kind="relationship" relationship="window.shadowedContentViewController" id="dBb-5l-5YY"/>
+                    </connections>
+                </windowController>
+                <customObject id="HUj-On-wpk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="435" y="708"/>
+        </scene>
+        <!--Broadcast View Controller-->
+        <scene sceneID="jcc-XQ-JSa">
+            <objects>
+                <customObject id="4iv-jB-zbD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <viewController id="dCp-rt-uLW" customClass="BroadcastViewController" customModule="SmickStudio" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="nrY-GV-gtB">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <customView wantsLayer="YES" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="jCa-tn-jaQ">
+                                <rect key="frame" x="0.0" y="32" width="480" height="238"/>
+                            </customView>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="V5a-Zi-qGi">
+                                <rect key="frame" x="53" y="1" width="191" height="26"/>
+                                <popUpButtonCell key="cell" type="push" alternateTitle="Select Device" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="mrb-ui-fht">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="uOe-3H-Slj">
+                                        <items>
+                                            <menuItem title="Computer Screen" id="omz-x2-oSn">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="changedVideoSource:" target="dCp-rt-uLW" id="zWo-ps-ySE"/>
+                                </connections>
+                            </popUpButton>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lJ5-Wg-3tQ">
+                                <rect key="frame" x="10" y="7" width="39" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Video" id="7la-j6-6it">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uCM-a0-EWm">
+                                <rect key="frame" x="291" y="1" width="184" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="179" id="pTE-pB-8nT"/>
+                                </constraints>
+                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="ATA-Lm-f9p">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="EDb-Uc-h3r"/>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="changedAudioSource:" target="dCp-rt-uLW" id="yH8-8Q-M3u"/>
+                                </connections>
+                            </popUpButton>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-ON-kUQ">
+                                <rect key="frame" x="247" y="6" width="40" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Audio" id="amo-li-1Hk">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="V5a-Zi-qGi" firstAttribute="leading" secondItem="lJ5-Wg-3tQ" secondAttribute="trailing" constant="8" symbolic="YES" id="2QH-VU-iqJ"/>
+                            <constraint firstItem="uCM-a0-EWm" firstAttribute="baseline" secondItem="V5a-Zi-qGi" secondAttribute="baseline" id="3vO-V9-IV1"/>
+                            <constraint firstItem="lJ5-Wg-3tQ" firstAttribute="leading" secondItem="nrY-GV-gtB" secondAttribute="leading" constant="12" id="75T-zc-3b8"/>
+                            <constraint firstAttribute="trailing" secondItem="jCa-tn-jaQ" secondAttribute="trailing" id="Dvr-MR-px4"/>
+                            <constraint firstAttribute="bottom" secondItem="V5a-Zi-qGi" secondAttribute="bottom" constant="4" id="FvM-dy-s8h"/>
+                            <constraint firstItem="ceK-ON-kUQ" firstAttribute="top" secondItem="jCa-tn-jaQ" secondAttribute="bottom" constant="9" id="MP5-5G-Hvp"/>
+                            <constraint firstItem="jCa-tn-jaQ" firstAttribute="top" secondItem="nrY-GV-gtB" secondAttribute="top" id="T3M-om-cOl"/>
+                            <constraint firstAttribute="bottom" secondItem="jCa-tn-jaQ" secondAttribute="bottom" constant="32" id="ccE-sD-b1Z"/>
+                            <constraint firstItem="ceK-ON-kUQ" firstAttribute="centerY" secondItem="uCM-a0-EWm" secondAttribute="centerY" id="dae-AG-u1t"/>
+                            <constraint firstItem="V5a-Zi-qGi" firstAttribute="top" secondItem="uCM-a0-EWm" secondAttribute="top" id="lUd-nM-ard"/>
+                            <constraint firstItem="ceK-ON-kUQ" firstAttribute="leading" secondItem="V5a-Zi-qGi" secondAttribute="trailing" constant="8" symbolic="YES" id="llg-82-ws1"/>
+                            <constraint firstItem="jCa-tn-jaQ" firstAttribute="leading" secondItem="nrY-GV-gtB" secondAttribute="leading" id="mxL-mo-hbW"/>
+                            <constraint firstAttribute="trailing" secondItem="uCM-a0-EWm" secondAttribute="trailing" constant="8" id="ooq-cz-LPa"/>
+                            <constraint firstItem="uCM-a0-EWm" firstAttribute="leading" secondItem="ceK-ON-kUQ" secondAttribute="trailing" constant="8" symbolic="YES" id="uwi-mu-WT0"/>
+                            <constraint firstItem="lJ5-Wg-3tQ" firstAttribute="top" secondItem="jCa-tn-jaQ" secondAttribute="bottom" constant="8" symbolic="YES" id="yj2-T2-Ity"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="audioSource" destination="uCM-a0-EWm" id="z9d-6q-L16"/>
+                        <outlet property="previewView" destination="jCa-tn-jaQ" id="pp2-7N-B3n"/>
+                        <outlet property="videoSource" destination="V5a-Zi-qGi" id="qf1-LR-7Sg"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1007" y="696"/>
         </scene>
     </scenes>
 </document>
